@@ -1,0 +1,39 @@
+name: Experimental Windows build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - experiment/pre-sr-copy-optimization
+    paths:
+      - 'OptiScaler/**'
+      - '*.sln'
+      - '*.slnx'
+      - '*.props'
+      - '*.targets'
+      - '.github/workflows/experimental-windows-build.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout with submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Configure MSBuild
+        uses: microsoft/setup-msbuild@v2
+      - name: Build Release x64
+        shell: pwsh
+        run: msbuild . /m /p:Configuration=Release /p:Platform=x64 /verbosity:minimal
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: OptiScaler-experimental-windows-x64
+          path: x64/Release/a/
+          if-no-files-found: error
+          retention-days: 7
