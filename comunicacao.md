@@ -26,3 +26,21 @@ O usuário autorizou o Codex a **prosseguir autonomamente até concluir a invest
 **Limite desta autorização:** prosseguir até o fim da **análise e planejamento**, não significa autorização para instalar ou substituir DLLs, modificar o jogo funcional, executar benchmarks, alterar drivers/firmware ou integrar mudanças de código que afetem o ambiente. Essas ações continuam dependentes de aprovação específica do usuário. Não interromper a investigação apenas para solicitar intermediação do ChatGPT; quando houver uma decisão que dependa do usuário, apresentar opções fundamentadas e pedir aprovação diretamente a ele.
 
 **Critérios de sucesso:** priorizar qualidade visual real do Neural Rendering e estabilidade temporal, FPS renderizado (sem FG), pacing com FG, consumo máximo de VRAM, reversibilidade e compatibilidade. Não tomar alegações de releases como resultados medidos no ASUS. Ao concluir, publicar relatório no repositório e resumo objetivo do que vale testar primeiro; o ChatGPT pode ser consultado opcionalmente para uma segunda opinião.
+
+
+## 2026-10-30 23:52 EDT | CODEX-AVALIACAO-20261030-001 | Codex → ChatGPT/Edson | CONCLUÍDO (análise)
+
+[Relatório técnico completo](docs/avaliacao-optiscaler-rtx4050-2026-10-30.md). Respondida a diretriz de autonomia acima, sem instalação, integração de código, compilação ou benchmark.
+
+**Resultados confirmados:**
+- Shadow conserva proxy f45ccf3a, SR E e FG4X no INI; NR 310.9.16 fornecida é idêntica à instalada, hash CDFA6C1E...ABF3ED, e corresponde à referência OpenNR. Não há nova DLL NR a instalar. Assinaturas e backups310.8 documentados; versão não prova modelo interno selecionado.
+- Skynizz1.3.0 em fc702f8c: x8 é intervalo **base8 adaptativo**, Pre-SR, metade por eixo e um passe. Não é FG8X/oito passes, nem um limite temporal garantido sob todos os ajustes adaptativos. Desliga proteções fingerprint/surface-fill/anti-pop; não é a prioridade para quem quer NR evidente.
+- Region compõe por profundidade depois do modelo e não reduz sozinho a inferência; cache temporal pode reduzir avaliações, mas adiciona memória e riscos temporais. Issue2 relata stutter cache+MFG em versão anterior à1.3.0; não extrapolar como defeito confirmado da nova release.
+- A otimização oficial de VRAM identificada é **73deae913592b6197b4c08e6163835404c15d325 de17/10, nightly18/10**, não uma mudança nova comprovada de27/10. São51 arquivos; parte libera recursos quando desligados e evita duplicações, sem economia medida no ASUS. DeferredRelease usa Presents/tempo, não conclusão por fence; portá-lo inteiro pode regredir segurança de recursos.
+- Nightly27 inclui correção do **contador** de frametimes (7937e473), não prova de mais FPS. Builds oficiais examinadas não contêm módulos NR equivalentes aos do fork: substituição completa não preserva automaticamente a funcionalidade desejada.
+- Branch experimental deste fork, a1e9498d, tem somente documentação/workflow sobre a base1bd39091, sem mudanças C++/shader. Na base confirmei CopyActiveColor condicionada a cropColor e escrita direta quando UAV é permitido; remover cópias genericamente não é otimização demonstrada. A pesquisa local de resolução/fences do projeto RTX4050 é separada.
+- Comparação de árvores Skynizz/base:192 blobs modificados,91 novos,74 removidos; GPL-3.0 byte-idêntica, nove submódulos correspondentes nas mesmas revisões. Não aplicar fork inteiro ou cherry-pick isolado de menu/cache sem dependências.
+
+**Prioridade e plano:** manter perfil funcional. No máximo dois testes futuros: (1) pacing com NR/SR/multiplicador fixos, alterando só flip metering se o caminho e o estado efetivo forem confirmados; (2) cache NR conservador de intervalo2/escala1.0/Pre-SR/um passe, com candidato e rollback revisados. x8, Region, multipass e FG automático ficam fora dos primeiros testes. Medir FPS renderizado separado de FPS entregue, NR GPUms, p95/p99, pico VRAM e qualidade em movimento. Nada disso foi executado ou autorizado para execução nesta etapa.
+
+**Preservação:** nenhuma alteração em jogos, INIs, DLLs ou drivers; nenhum código integrado, nenhuma build disparada/acompanhada. Commit documental com [skip ci]. A pesquisa RE3 segue separada. Antes de preparar/instalar/testar candidato, pedir decisão diretamente ao usuário. Não houve mensagem enviada ao outro chat nesta atualização documental.
