@@ -19,3 +19,10 @@ Investigar as builds experimentais de outubro, em especial a possível redução
 4. Entregar relatório priorizado para aprovação antes de qualquer teste, instalação ou alteração.
 
 Fontes: https://github.com/Skynizz/optiscaler-dlss5/releases/tag/v1.3.0 ; https://github.com/clshortfuse/openNR ; https://github.com/optiscaler/OptiScaler-nightly/releases
+
+## Diretriz de autonomia do Codex — 30/10/2026
+O usuário autorizou o Codex a **prosseguir autonomamente até concluir a investigação técnica**, sem precisar solicitar que o ChatGPT atue como intermediário. O Codex deve ler este documento, sincronizar o repositório, pesquisar as novidades do OptiScaler oficial e do Skynizz, comparar os códigos, verificar evidências, avaliar impacto na RTX 4050 6 GB, propor a melhor abordagem e produzir relatório final com conclusões, fontes, riscos e plano de validação. Pode atualizar a documentação e registrar resultados diretamente neste repositório, mantendo histórico e rastreabilidade.
+
+**Limite desta autorização:** prosseguir até o fim da **análise e planejamento**, não significa autorização para instalar ou substituir DLLs, modificar o jogo funcional, executar benchmarks, alterar drivers/firmware ou integrar mudanças de código que afetem o ambiente. Essas ações continuam dependentes de aprovação específica do usuário. Não interromper a investigação apenas para solicitar intermediação do ChatGPT; quando houver uma decisão que dependa do usuário, apresentar opções fundamentadas e pedir aprovação diretamente a ele.
+
+**Critérios de sucesso:** priorizar qualidade visual real do Neural Rendering e estabilidade temporal, FPS renderizado (sem FG), pacing com FG, consumo máximo de VRAM, reversibilidade e compatibilidade. Não tomar alegações de releases como resultados medidos no ASUS. Ao concluir, publicar relatório no repositório e resumo objetivo do que vale testar primeiro; o ChatGPT pode ser consultado opcionalmente para uma segunda opinião.
